@@ -2,6 +2,7 @@ package com.returns.service;
 
 import com.returns.config.BotConfig;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -14,6 +15,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
  */
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class TelegramBot extends TelegramLongPollingBot {
     private final BotConfig config;
 
@@ -45,6 +47,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private void startCommand(long chatId, String name) {
         var message = String.format("Hello, %s!", name);
+        log.info("Получена команда /start, от пользователя с именем {} из чата с id {}",name, chatId);
 
         sendMessage(chatId, message);
     }

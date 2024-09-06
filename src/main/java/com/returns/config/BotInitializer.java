@@ -2,6 +2,7 @@ package com.returns.config;
 
 import com.returns.service.TelegramBot;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
  * @author Nikolay Radzivon
  * @Date 29.08.2024
  */
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class BotInitializer {
@@ -25,7 +27,7 @@ public class BotInitializer {
         try {
             telegramBotApi.registerBot(bot);
         } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
+            log.error("Can't register bot", e);
         }
     }
 }
